@@ -2,14 +2,21 @@ import { Link, Outlet } from 'react-router-dom'
 import '../App.css'
 
 export default function Layout() {
+
+  const navBarStyle = {
+    backgroundColor: "black",
+    padding: 20,
+  }
+
+
   return (
     <div>
-      <nav className="m-3">
-        <Link to="/" className="me-3">Home</Link>
-        <Link to="/about/" className="me-3">About</Link>
-        <Link to="/resume/">Resume</Link>
+      <nav style={navBarStyle}>
+        <Link className="navBarButton" to="/">Home</Link>
+        <Link className="navBarButton" to="/about/">About</Link>
+        <Link className="navBarButton" to="/resume/">Résumé</Link>
+        <Link className="navBarButton" >Your List</Link>
       </nav>
-
       <main>
         <Outlet />
       </main>
