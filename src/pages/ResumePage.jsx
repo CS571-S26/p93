@@ -1,12 +1,14 @@
-import '../App.css'
-import { Container, Button, Form } from 'react-bootstrap'
-import { useState } from "react";
+import '../styles/resume.css'
+import { Container, Button} from 'react-bootstrap'
+import { useState, useEffect } from "react";
 import Education from "../components/Education"
 import Experience from "../components/Experience"
 import Project from "../components/Project"
 import Skill from "../components/Skill"
 import Extracurricular from "../components/Extracurricular"
 import Award from "../components/Award"
+import { getDocs, collection } from "firebase/firestore"
+import { db } from "../firebase"
 
 export default function ResumePage() {
 
@@ -17,11 +19,25 @@ export default function ResumePage() {
   const [awards, setAwards] = useState([]);
   const [skills, setSkills] = useState([]);
 
+  function updateItem(type, id, field, value) {
+    const updater = (arr) =>
+      arr.map(item =>
+        item.id === id ? { ...item, [field]: value } : item
+      );
+  
+    if (type === "Education") setEducations(prev => updater(prev));
+    else if (type === "Experience") setExperiences(prev => updater(prev));
+    else if (type === "Project") setProjects(prev => updater(prev));
+    else if (type === "Extracurricular") setExtracurriculars(prev => updater(prev));
+    else if (type === "Award") setAwards(prev => updater(prev));
+    else if (type === "Skill") setSkills(prev => updater(prev));
+  }
+
   function addItem(type){
     if (type === "Education")
       setEducations(prev => [...prev, { school: "", graduationDate:"", gpa:"", majors:"", id: crypto.randomUUID()}]);
     else if (type === "Experience")
-      setExperiences(prev => [...prev, { position: "", dates: "", description: "" , id: crypto.randomUUID()}]);
+      setExperiences(prev => [...prev, { position: "", employer: "", start: "", end: "", description: "" , id: crypto.randomUUID()}]);
     else if (type === "Project")
       setProjects(prev => [...prev, { name: "", description: "" , id: crypto.randomUUID()}]);
     else if (type === "Extracurricular")
@@ -46,11 +62,18 @@ export default function ResumePage() {
     else if (type === "Skill") 
       setSkills(prev => prev.filter(item => item.id !== id));
   }
+
+  function handleSave() {
+      getDocs(collection(db, "resumes")).then((snapshot) => {
+        alert("Your résumé has been synced!");
+      });
+    
+  }
     
 
   return (
     <div>
-      <Container style={{padding: 50, display: "flex", flexDirection: "column", alignItems: "center"}}>
+      <Container style={{padding: 40, display: "flex", flexDirection: "column", alignItems: "center"}}>
         <h1> Résumé Details</h1>
       </Container>
 
@@ -58,7 +81,10 @@ export default function ResumePage() {
         <h2> Education</h2>
         {
           educations.length > 0 
-            ? educations.map(edu => <Education key={edu.id} remove={removeItem} {...edu}/>) 
+            ? educations.map(edu => <Education key={edu.id} 
+              remove={removeItem} 
+              {...edu} 
+              update={updateItem}/>) 
             : <p> No educations currently saved</p>
         }
         <button className="addButton" onClick={() => addItem("Education")}> Add Education </button>
@@ -69,7 +95,10 @@ export default function ResumePage() {
         {
           experiences.length > 0
             ? experiences.map(exp => (
-                <Experience key={exp.id} remove={removeItem} {...exp}/>
+                <Experience key={exp.id} 
+                remove={removeItem} 
+                {...exp}
+                update={updateItem}/>
               ))
             : <p> No experiences currently saved</p>
         }
@@ -81,7 +110,10 @@ export default function ResumePage() {
         {
           projects.length > 0
             ? projects.map(proj => (
-                <Project key={proj.id} remove={removeItem} {...proj}/>
+                <Project key={proj.id} 
+                remove={removeItem} 
+                {...proj}
+                update={updateItem}/>
               ))
             : <p> No projects currently saved</p>
         }
@@ -93,7 +125,10 @@ export default function ResumePage() {
         {
           extracurriculars.length > 0
             ? extracurriculars.map(extra => (
-                <Extracurricular key={extra.id} remove={removeItem} {...extra}/>
+                <Extracurricular key={extra.id} 
+                remove={removeItem} 
+                {...extra}
+                update={updateItem}/>
               ))
             : <p> No extracurriculars currently saved</p>
         }
@@ -105,7 +140,10 @@ export default function ResumePage() {
         {
           awards.length > 0
             ? awards.map(award => (
-                <Award key={award.id} remove={removeItem} {...award}/>
+                <Award key={award.id} 
+                remove={removeItem} 
+                {...award}
+                update={updateItem}/>
               ))
             : <p> No awards currently saved</p>
         }
@@ -117,7 +155,10 @@ export default function ResumePage() {
         {
           skills.length > 0
             ? skills.map(skill => (
-                <Skill key={skill.id} remove={removeItem} {...skill}/>
+                <Skill key={skill.id} 
+                remove={removeItem} 
+                {...skill}
+                update={updateItem}/>
               ))
             : <p> No skills currently saved</p>
         }
@@ -125,8 +166,7 @@ export default function ResumePage() {
       </Container>
 
       <Container style={{paddingBottom: 30}}>
-        <button className="saveButton"> Save </button>
-        <Button> Clear </Button>
+        <Button style={{marginRight: 10}} onClick={handleSave}> Save </Button>
       </Container>
     </div>
   )

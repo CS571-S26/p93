@@ -13,10 +13,10 @@ export default function Layout() {
     <div>
       <nav style={navBarStyle}>
         <Link className="navBarButton" to="/">Home</Link>
+        <Link className="navBarButton" to="/login">Login</Link>
         <Link className="navBarButton" to="/resume/">Résumé</Link>
         <Link className="navBarButton" to="/findjobs">Find Jobs</Link>
         <Link className="navBarButton" to="/yourlist">Your List</Link>
-        <Link className="navBarButton" to="/about/">About</Link>
       </nav>
       <main>
         <Outlet />

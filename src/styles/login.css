@@ -1,0 +1,19 @@
+.loginContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  align-items: center;
+}
+
+.loginRow {
+  margin-bottom: 20px;
+}
+
+.switchLoginMode {
+  padding-top: 50px;
+}
+
+.switchLoginMode:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}

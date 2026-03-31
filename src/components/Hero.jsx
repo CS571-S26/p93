@@ -7,7 +7,7 @@ export default function Hero() {
   const navigate = useNavigate();
 
   function handleFindPathRequest(){
-    navigate("/resume")
+    navigate("/login")
   }
 
   return (
