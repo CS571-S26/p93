@@ -7,6 +7,7 @@ import Layout from './components/Layout.jsx'
 import YourListPage from './pages/YourListPage.jsx'
 import FindJobsPage from './pages/FindJobsPage.jsx'
 import LoginPage from './pages/LoginPage.jsx'
+import LogoutPage from './pages/LogoutPage.jsx'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="yourlist" element={<YourListPage/>} />
         <Route path="findjobs" element={<FindJobsPage/>} />
         <Route path="login" element={<LoginPage/>} />
+        <Route path="logout" element={<LogoutPage/>} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>

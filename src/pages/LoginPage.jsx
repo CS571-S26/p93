@@ -1,5 +1,6 @@
 import { Form, Container, Button, Row, Col } from 'react-bootstrap'
-import { useState, useRef, useContext } from 'react';
+import { useState, useRef, useContext} from 'react';
+import { useNavigate } from 'react-router-dom';
 import "../styles/login.css"
 import { auth } from "../firebase";
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
@@ -14,6 +15,7 @@ export default function LoginPage() {
   const repeatPassword = useRef();
   
   const user = useContext(AuthContext);
+  const navigate = useNavigate();
 
   function handleLogin(type) {
 
@@ -22,26 +24,37 @@ export default function LoginPage() {
       signInWithEmailAndPassword(auth, email.current.value, password.current.value)
       .then((cred) => {
         console.log("Logged in: " + cred.user.uid);
+        navigate("/resume");
+
       }).catch((err) => {
-        console.error(err);
-        alert(err.message);
+        console.log(err);
+        if (err.code === "auth/invalid-credential") 
+          alert("Your email or password are incorrect.");
+        else
+          alert("Error logging in. Please check username and password.");
+        
       });
 
     } else {
 
-      if (password.current.value < 6 || repeatPassword.current.value.length < 6){
+      if (password.current.value.length < 6 || repeatPassword.current.value.length < 6){
         alert("Passwords must be at least 6 characters!");
       } else if (password.current.value !== repeatPassword.current.value) {
         alert("Passwords do not match!");
+      } else {
+        createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
+        .then((cred) => {
+          console.log("User Created: " + cred.user.uid);
+          navigate("/yourlist");
+        }).catch((err) => {
+          if (err.code === "auth/email-already-in-use") 
+            alert("Email already in use! Try again with a different email!");
+          else if (err.code === "auth/invalid-email")
+            alert("Invalid email format!");
+          else 
+            alert("Sign up failed. Please try again later.");
+        });
       }
-      createUserWithEmailAndPassword(auth, email.current.value, password.current.value, repeatPassword.current.value)
-      .then((cred) => {
-        console.log("User Created: " + cred.user.uid);
-      }).catch((err) => {
-        console.error(err);
-        alert(err.message);
-      });
-
     }
   }
 
@@ -90,7 +103,6 @@ export default function LoginPage() {
         
       </Container>
     }
-      
     </div>
       
      
