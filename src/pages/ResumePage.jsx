@@ -61,7 +61,7 @@ export default function ResumePage() {
             ? educations.map(edu => <Education key={edu.id} remove={removeItem} {...edu}/>) 
             : <p> No educations currently saved</p>
         }
-        <Button onClick={() => addItem("Education")}> Add Education </Button>
+        <button className="addButton" onClick={() => addItem("Education")}> Add Education </button>
       </Container>
 
       <Container style={{paddingBottom: 30}}>
@@ -73,7 +73,7 @@ export default function ResumePage() {
               ))
             : <p> No experiences currently saved</p>
         }
-        <Button onClick={() => addItem("Experience")}> Add Experience </Button>
+        <button className="addButton" onClick={() => addItem("Experience")}> Add Experience </button>
       </Container>
 
       <Container style={{paddingBottom: 30}}>
@@ -85,7 +85,7 @@ export default function ResumePage() {
               ))
             : <p> No projects currently saved</p>
         }
-        <Button onClick={() => addItem("Project")}> Add Project </Button>
+        <button  className="addButton" onClick={() => addItem("Project")}> Add Project </button>
       </Container>
 
       <Container style={{paddingBottom: 30}}>
@@ -97,7 +97,7 @@ export default function ResumePage() {
               ))
             : <p> No extracurriculars currently saved</p>
         }
-        <Button onClick={() => addItem("Extracurricular")}> Add Extracurricular </Button>
+        <button className="addButton" onClick={() => addItem("Extracurricular")}> Add Extracurricular </button>
       </Container>
 
       <Container style={{paddingBottom: 30}}>
@@ -109,7 +109,7 @@ export default function ResumePage() {
               ))
             : <p> No awards currently saved</p>
         }
-        <Button onClick={() => addItem("Award")}> Add Award </Button>
+        <button className="addButton" onClick={() => addItem("Award")}> Add Award </button>
       </Container>
 
       <Container style={{paddingBottom: 30}}>
@@ -121,11 +121,11 @@ export default function ResumePage() {
               ))
             : <p> No skills currently saved</p>
         }
-        <Button onClick={() => addItem("Skill")}> Add Skill </Button>
+        <button className="addButton" onClick={() => addItem("Skill")}> Add Skill </button>
       </Container>
 
       <Container style={{paddingBottom: 30}}>
-        <Button> Save </Button>
+        <button className="saveButton"> Save </button>
         <Button> Clear </Button>
       </Container>
     </div>

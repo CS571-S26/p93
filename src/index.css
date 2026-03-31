@@ -123,3 +123,40 @@
 
   margin: 10px;
 }
+
+.addButton {
+  background-color: #FF4433;
+  border-radius: 5px;
+  color: white;
+  border-width: 0;
+  padding: 10px;
+}
+
+.addButton:hover{
+  opacity: 0.7;
+}
+
+.addButton:active {
+  opacity: 0.5;
+}
+
+
+.saveButton {
+  background-color: black;
+  border-radius: 14px;
+  color: white;
+  border-width: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 20px;
+}
+
+.saveButton:hover{
+  opacity: 0.7;
+}
+
+.saveButton:active {
+  opacity: 0.5;
+}
