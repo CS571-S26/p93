@@ -7,8 +7,10 @@ import Project from "../components/Project"
 import Skill from "../components/Skill"
 import Extracurricular from "../components/Extracurricular"
 import Award from "../components/Award"
-import { getDocs, collection } from "firebase/firestore"
+import { doc, setDoc, getDoc } from "firebase/firestore"
 import { db } from "../firebase"
+import { useContext } from "react";
+import AuthContext from "../AuthContext";
 
 export default function ResumePage() {
 
@@ -18,6 +20,27 @@ export default function ResumePage() {
   const [extracurriculars, setExtracurriculars] = useState([]);
   const [awards, setAwards] = useState([]);
   const [skills, setSkills] = useState([]);
+
+  const user = useContext(AuthContext);
+
+  // Handles initial load of resume data
+  useEffect(() => {
+
+    if (user) {
+      getDoc(doc(db, "resumes", user.uid)).then((snap) => {
+        if (snap.exists()) {
+          const data = snap.data();
+          setEducations(data.educations || []);
+          setExperiences(data.experiences || []);
+          setProjects(data.projects || []);
+          setExtracurriculars(data.extracurriculars || []);
+          setAwards(data.awards || []);
+          setSkills(data.skills || []);
+        }
+      });
+    }
+
+  }, [user]);
 
   function updateItem(type, id, field, value) {
     const updater = (arr) =>
@@ -63,11 +86,28 @@ export default function ResumePage() {
       setSkills(prev => prev.filter(item => item.id !== id));
   }
 
-  function handleSave() {
-      getDocs(collection(db, "resumes")).then((snapshot) => {
+  async function handleSave() {
+
+    if (user) {
+      const resume = {
+        "educations": educations,
+        "experiences": experiences,
+        "projects": projects,
+        "extracurriculars": extracurriculars,
+        "awards": awards,
+        "skills": skills
+      }
+      try {
+        await setDoc(doc(db, "resumes", user.uid), resume);
         alert("Your résumé has been synced!");
-      });
-    
+      } catch (err) {
+        console.log(err);
+        alert("Error saving résumé. Please try again.");
+      }
+
+    } else {
+      alert("Saving résumé is not available if you are not logged in!");
+    }
   }
     
 

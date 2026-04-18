@@ -23,7 +23,6 @@ export default function LoginPage() {
 
       signInWithEmailAndPassword(auth, email.current.value, password.current.value)
       .then((cred) => {
-        console.log("Logged in: " + cred.user.uid);
         navigate("/resume");
 
       }).catch((err) => {
@@ -44,7 +43,6 @@ export default function LoginPage() {
       } else {
         createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
         .then((cred) => {
-          console.log("User Created: " + cred.user.uid);
           navigate("/yourlist");
         }).catch((err) => {
           if (err.code === "auth/email-already-in-use") 
