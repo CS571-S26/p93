@@ -6,7 +6,7 @@ import { BoxArrowUpRight, Heart, HeartFill } from "react-bootstrap-icons";
 
 export default function JobPosting(props) {
 
-  const [favorite, setFavorite] = useState(false);
+  const [favorite, setFavorite] = useState(props.favorite);
 
   let matchedSkills = props.matchingSkills.reduce((acc,val) => acc + ", " + val, "");
   if (matchedSkills.length > 2){
@@ -20,6 +20,7 @@ export default function JobPosting(props) {
 
   function handleFavorite() {
     setFavorite(!favorite);
+    props.handleFavoritePress(!favorite, props.id);
   }
   
 
@@ -32,9 +33,9 @@ export default function JobPosting(props) {
 
     <Container>
           <a href={`https://www.google.com/search?q=${encodeURIComponent(props.company + " " + props.role + " in " + props.location + " internship application 2026")}`} target="_blank" rel="noreferrer">
-            <Button className="visitButton">
-              Search <BoxArrowUpRight /> 
-            </Button>
+            <button style={{padding: 5}}>
+              Visit <BoxArrowUpRight /> 
+            </button>
           </a>
           {
             favorite ? <button className="favoriteButton" onClick={handleFavorite}> 

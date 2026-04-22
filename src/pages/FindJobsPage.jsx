@@ -12,8 +12,10 @@ export default function FindJobsPage() {
 
 
   const [generatedJobs, setGeneratedJobs] = useState([]);
+  const [favoritedJobs, setFavoritedJobs] = useState([]);
   const user = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
+
 
   const promptRef = useRef();
 
@@ -26,7 +28,16 @@ export default function FindJobsPage() {
           setGeneratedJobs(JSON.parse(data.jobs));
         }
       });
+
+      getDoc(doc(db,"favoritedFindings", user.uid)).then((snap) => {
+        if (snap.exists()) {
+          const data = snap.data();
+          setFavoritedJobs(JSON.parse(data.favorites));
+        }
+      });
+
     }
+
   }, [user])
 
   async function handleGenerate() {
@@ -48,6 +59,7 @@ export default function FindJobsPage() {
         const result = await generateJobs({
           resume,
           previousJobs: generatedJobs,
+          favoritedJobs: favoritedJobs,
           prompt: promptRef.current.value
         });
 
@@ -71,6 +83,45 @@ export default function FindJobsPage() {
   
     } else {
       alert("Please login to generate job postings.");
+    }
+  }
+
+  async function handleFavoritePress(favorite, id) {
+
+    let target = generatedJobs.find(j => j.id === id);
+
+    if (!target) return;
+
+    for (let j of generatedJobs) {
+      if (j.id === id){
+        target = j;
+        break;
+      }
+    }
+
+    const updatedJobs = generatedJobs.map(j => 
+      j.id === id ? { ...j, favorite } : j
+    );
+  
+    setGeneratedJobs(updatedJobs);
+    await setDoc(doc(db, "lastFindings", user.uid), { jobs: JSON.stringify(updatedJobs) });
+
+    const favoritedJobObj = {
+      "role": target.role,
+      "company": target.company,
+      "location": target.location,
+      "id": target.id,
+      "applied": false
+    };
+
+    if (favorite) {
+      await setDoc(doc(db, "favoritedFindings", user.uid), { favorites: JSON.stringify([...favoritedJobs, favoritedJobObj]) });
+      console.log([...favoritedJobs, favoritedJobObj]);
+      setFavoritedJobs([...favoritedJobs, favoritedJobObj]);
+    } else {
+      const modifiedList = favoritedJobs.filter(j => j.id !== target.id);
+      setFavoritedJobs(modifiedList);
+      await setDoc(doc(db, "favoritedFindings", user.uid), { favorites: JSON.stringify(modifiedList) });
     }
   }
 
@@ -100,7 +151,7 @@ export default function FindJobsPage() {
           }
           {
             generatedJobs.length > 0 ? generatedJobs.map((j, index) => {
-              return <JobPosting key={j.id} index={index} {...j} />
+              return <JobPosting key={j.id} index={index} {...j} handleFavoritePress={handleFavoritePress}/>
             }) : <></>
           }
         </Container>
