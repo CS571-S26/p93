@@ -7,9 +7,6 @@ setGlobalOptions({ maxInstances: 10 });
 exports.generateJobs = onCall({ secrets: ["GEMINI_KEY", "ADZUNA_APP_ID", "ADZUNA_API_KEY"], cors: true }, async (request) => {
   const { resume, previousJobs, favoritedJobs, prompt } = request.data;
 
-  if (!resume) throw new HttpsError("invalid-argument", "Resume is required.");
-  if (!prompt) throw new HttpsError("invalid-argument", "Prompt is required.");
-
   const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_KEY });
 
   // Step 1: Generate Adzuna query string
