@@ -218,6 +218,12 @@ export default function ResumePage() {
       <Container style={{paddingBottom: 30}}>
         <Button style={{marginRight: 10}} onClick={handleSave}> Save </Button>
       </Container>
+      <Container style={{display: "flex", justifyContent: "center"}}>
+        <p style={{paddingTop:40}}> Jobs by <a href="https://www.adzuna.com" target="_blank" rel="noreferrer">
+           <img src="https://zunastatic-abf.kxcdn.com/images/global/adzuna_logo.svg" alt="Adzuna" style={{ height: 23 }} />
+          </a>
+        </p>
+      </Container>
     </div>
   )
 }

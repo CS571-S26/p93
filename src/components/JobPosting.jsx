@@ -8,15 +8,16 @@ export default function JobPosting(props) {
 
   const [favorite, setFavorite] = useState(props.favorite);
 
-  let matchedSkills = props.matchingSkills.reduce((acc,val) => acc + ", " + val, "");
-  if (matchedSkills.length > 2){
-    matchedSkills = matchedSkills.substring(2);
-  }
+  const matchingSkills = Array.isArray(props.matchingSkills) 
+  ? props.matchingSkills 
+  : props.matchingSkills?.split(",").map(s => s.trim()) || [];
 
-  let toLearn = props.skillsToLearn.reduce((acc,val) => acc + ", " + val, "");
-  if (toLearn.length > 2){
-    toLearn = toLearn.substring(2);
-  }
+  const skillsToLearn = Array.isArray(props.skillsToLearn)
+  ? props.skillsToLearn
+  : props.skillsToLearn?.split(",").map(s => s.trim()) || [];
+
+  const matchedSkills = matchingSkills.join(", ");
+  const toLearn = skillsToLearn.join(", ");
 
   function handleFavorite() {
     setFavorite(!favorite);
@@ -28,11 +29,11 @@ export default function JobPosting(props) {
     <h3> {props.role} </h3>
     <p style={{fontSize: 20}}> {props.company} | {props.location} </p>
     <p> {props.description} </p>
-    <p> <span style={{fontWeight: "bold"}}> Matching Skills: </span> {matchedSkills} </p>
-    <p> <span style={{fontWeight: "bold"}}> To Learn: </span> {toLearn} </p>
+    <p> <span style={{fontWeight: "bold"}}> Matching Skills: </span> {matchedSkills ? matchedSkills : "N/A"} </p>
+    <p> <span style={{fontWeight: "bold"}}> To Learn: </span> {toLearn ? toLearn : "N/A"} </p>
 
     <Container>
-          <a href={`https://www.google.com/search?q=${encodeURIComponent(props.company + " " + props.role + " in " + props.location + " internship application 2026")}`} target="_blank" rel="noreferrer">
+          <a href={props.url} target="_blank" rel="noreferrer">
             <button style={{padding: 5}}>
               Visit <BoxArrowUpRight /> 
             </button>
@@ -46,8 +47,6 @@ export default function JobPosting(props) {
             </button>
           }
     </Container>
-
-
 
 
   </Container>

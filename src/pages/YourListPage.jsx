@@ -43,7 +43,6 @@ export default function YourListPage() {
     const confirmed = window.confirm("The job will be removed from your list. Press OK if you wish to proceed.");
     if (!confirmed) return;
 
-
     const updated = favorites.filter(f =>
       f.id !== id 
     );
@@ -52,6 +51,18 @@ export default function YourListPage() {
       await setDoc(doc(db, "favoritedFindings", user.uid), {
         favorites: JSON.stringify(updated)
       });
+
+      const lastFindingsSnap = await getDoc(doc(db, "lastFindings", user.uid));
+      if (lastFindingsSnap.exists()) {
+        const lastJobs = JSON.parse(lastFindingsSnap.data().jobs);
+        const updatedLastJobs = lastJobs.map(j => 
+          j.id === id ? { ...j, favorite: false } : j
+        );
+        await setDoc(doc(db, "lastFindings", user.uid), {
+          jobs: JSON.stringify(updatedLastJobs)
+        });
+      }
+      
     }
   }
 
@@ -107,6 +118,10 @@ export default function YourListPage() {
         )}
 
       </Container>
+      <p style={{paddingTop:40}}> Jobs by <a href="https://www.adzuna.com" target="_blank" rel="noreferrer">
+           <img src="https://zunastatic-abf.kxcdn.com/images/global/adzuna_logo.svg" alt="Adzuna" style={{ height: 23 }} />
+          </a>
+      </p>
     </Container>
   );
 }

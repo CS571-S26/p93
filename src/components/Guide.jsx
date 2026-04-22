@@ -21,5 +21,9 @@ export default function Guide(props) {
         </Col>
       </Row>
     </Container>
+    <p style={{paddingTop:40}}> Jobs by <a href="https://www.adzuna.com" target="_blank" rel="noreferrer">
+           <img src="https://zunastatic-abf.kxcdn.com/images/global/adzuna_logo.svg" alt="Adzuna" style={{ height: 23 }} />
+          </a>
+    </p>
   </Container>
 }

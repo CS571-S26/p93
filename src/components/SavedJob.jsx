@@ -18,7 +18,7 @@ export default function SavedJob(props) {
       <p>{props.location}</p>
      </Col>
      <Col>
-     <a href={`https://www.google.com/search?q=${encodeURIComponent(props.company + " " + props.role + " in " + props.location + " internship application 2026")}`} target="_blank" rel="noreferrer">
+     <a href={props.url} target="_blank" rel="noreferrer">
             <button className="visitButton">
               Visit <BoxArrowUpRight /> 
             </button>
