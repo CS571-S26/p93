@@ -23,7 +23,7 @@ export default function JobPosting(props) {
   }
   
 
-  return <Container className="findJobContainer">
+  return <Container className="findJobContainer" style={{animation: "fadeIn 0.4s ease both", animationDelay: `${props.index * 0.3}s`}}>
     <h3> {props.role} </h3>
     <p style={{fontSize: 20}}> {props.company} | {props.location} </p>
     <p> {props.description} </p>

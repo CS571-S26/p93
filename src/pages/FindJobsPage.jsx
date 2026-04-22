@@ -78,7 +78,7 @@ export default function FindJobsPage() {
   return (
     <div>
       <Container style={{padding: 40, display: "flex", flexDirection: "column", alignItems: "center"}}>
-        <h1 style={{marginBottom: 40}}> Find Jobs</h1>
+        <h1 style={{}} className="findJobsHeader"> Find Jobs</h1>
         <Container className="findJobContainer">
           <Container style={{marginBottom: 20}} >
             <Row className="align-items-end">
@@ -99,8 +99,8 @@ export default function FindJobsPage() {
             loading ? <p className="loadingText"> Generating internships... please wait. Do not reload or change pages. </p> : <></>
           }
           {
-            generatedJobs.length > 0 ? generatedJobs.map(j => {
-              return <JobPosting key={j.id} {...j} />
+            generatedJobs.length > 0 ? generatedJobs.map((j, index) => {
+              return <JobPosting key={j.id} index={index} {...j} />
             }) : <></>
           }
         </Container>

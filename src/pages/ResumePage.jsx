@@ -114,17 +114,19 @@ export default function ResumePage() {
   return (
     <div>
       <Container style={{padding: 40, display: "flex", flexDirection: "column", alignItems: "center"}}>
-        <h1> Résumé Details</h1>
+        <h1 className="resumeHeader"> Résumé Details</h1>
       </Container>
 
       <Container style={{paddingBottom: 30}}>
         <h2> Education</h2>
         {
           educations.length > 0 
-            ? educations.map(edu => <Education key={edu.id} 
+            ? educations.map((edu, index)=> <Education key={edu.id} 
               remove={removeItem} 
               {...edu} 
-              update={updateItem}/>) 
+              update={updateItem}
+              index={index}
+              />) 
             : <p> No educations currently saved</p>
         }
         <button className="addButton" onClick={() => addItem("Education")}> Add Education </button>
@@ -134,11 +136,13 @@ export default function ResumePage() {
         <h2> Experience </h2>
         {
           experiences.length > 0
-            ? experiences.map(exp => (
+            ? experiences.map((exp, index) => (
                 <Experience key={exp.id} 
                 remove={removeItem} 
                 {...exp}
-                update={updateItem}/>
+                update={updateItem}
+                index={index}
+                />
               ))
             : <p> No experiences currently saved</p>
         }
@@ -149,11 +153,13 @@ export default function ResumePage() {
         <h2> Projects</h2>
         {
           projects.length > 0
-            ? projects.map(proj => (
+            ? projects.map((proj, index) => (
                 <Project key={proj.id} 
                 remove={removeItem} 
                 {...proj}
-                update={updateItem}/>
+                update={updateItem}
+                index={index}
+                />
               ))
             : <p> No projects currently saved</p>
         }
@@ -164,7 +170,7 @@ export default function ResumePage() {
         <h2> Extracurriculars </h2>
         {
           extracurriculars.length > 0
-            ? extracurriculars.map(extra => (
+            ? extracurriculars.map((extra,index) => (
                 <Extracurricular key={extra.id} 
                 remove={removeItem} 
                 {...extra}
@@ -179,11 +185,13 @@ export default function ResumePage() {
         <h2> Awards </h2>
         {
           awards.length > 0
-            ? awards.map(award => (
+            ? awards.map((award, index) => (
                 <Award key={award.id} 
                 remove={removeItem} 
                 {...award}
-                update={updateItem}/>
+                update={updateItem}
+                index={index}
+                />
               ))
             : <p> No awards currently saved</p>
         }
@@ -194,11 +202,13 @@ export default function ResumePage() {
         <h2> Skills </h2>
         {
           skills.length > 0
-            ? skills.map(skill => (
+            ? skills.map((skill,index) => (
                 <Skill key={skill.id} 
                 remove={removeItem} 
                 {...skill}
-                update={updateItem}/>
+                update={updateItem}
+                index={index}
+                />
               ))
             : <p> No skills currently saved</p>
         }
