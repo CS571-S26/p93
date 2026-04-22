@@ -17,7 +17,7 @@ export default function Guide(props) {
           <p> Save your favorite internships</p>
         </Col>
         <Col className="customCard">
-          <p> Recieve personalized feedback </p>
+          <p> Receive personalized feedback </p>
         </Col>
       </Row>
     </Container>
