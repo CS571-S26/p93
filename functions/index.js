@@ -116,6 +116,7 @@ exports.generateJobs = onCall({ secrets: ["GEMINI_KEY", "ADZUNA_APP_ID", "ADZUNA
       - skillsToLearn: a JSON array of strings of skills they may need to develop e.g. ["Kubernetes"], if none put ["N/A"]
       - location: location of the internship (from the listing), just include city and state for consistent formatting
       - applied: false (boolean, not string)
+      - favorite: false (boolean, not string)
       - url: the application link (from the listing, use redirect_url exactly as given, if not given default to a google search of the link)
       - id: the job's id from the listing (use the id field exactly as given)
 
