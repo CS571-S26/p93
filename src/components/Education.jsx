@@ -4,7 +4,7 @@ import "../styles/resume.css"
 export default function Education(props) {
 
 
-  return <Container className="resumeDataContainer" style={{animation: "fadeIn 0.4s ease both", animationDelay: `${props.index * 0.3}s`}}>
+  return <Container className="resumeDataContainer" style={{animation: "fadeIn 0.4s ease both"}}>
     <Row className="resumeRow">
         <Col>
           <Form.Label> School </Form.Label>
