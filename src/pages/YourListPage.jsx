@@ -62,7 +62,7 @@ export default function YourListPage() {
           jobs: JSON.stringify(updatedLastJobs)
         });
       }
-      
+
     }
   }
 
@@ -80,10 +80,10 @@ export default function YourListPage() {
           onClick={() => setNotAppliedOpen(o => !o)}
           style={{ cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "10px 0", borderBottom: "1px solid #dee2e6" }}
         >
-          <h5 style={{ margin: 0 }}>
+          <h2 style={{ margin: 0, fontSize: "1.1rem" }}>
             Open
             <span style={{ marginLeft: 10, fontSize: "0.85rem", color: "#6c757d" }}>({notApplied.length})</span>
-          </h5>
+          </h2>
           {notAppliedOpen ? <ChevronUp /> : <ChevronDown />}
         </div>
 
@@ -101,10 +101,10 @@ export default function YourListPage() {
           onClick={() => setAppliedOpen(o => !o)}
           style={{ cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "10px 0", borderBottom: "1px solid #dee2e6" }}
         >
-          <h5 style={{ margin: 0 }}>
+          <h2 style={{ margin: 0, fontSize: "1.1rem"}}>
             Applied
             <span style={{ marginLeft: 10, fontSize: "0.85rem", color: "#6c757d" }}>({applied.length})</span>
-          </h5>
+          </h2>
           {appliedOpen ? <ChevronUp /> : <ChevronDown />}
         </div>
 

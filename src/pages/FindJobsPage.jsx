@@ -130,7 +130,7 @@ export default function FindJobsPage() {
   return (
     <div>
       <Container style={{padding: 40, display: "flex", flexDirection: "column", alignItems: "center"}}>
-        <h1 style={{}} className="findJobsHeader"> Find Jobs</h1>
+        <h1 className="findJobsHeader"> Find Jobs</h1>
         <Container className="findJobContainer">
           <Container style={{marginBottom: 20}} >
             <Row className="align-items-end">

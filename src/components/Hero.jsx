@@ -23,9 +23,9 @@ export default function Hero() {
         <span className="logoPartOne">Intern</span>
         <span className="logoPartTwo">Stack.</span>
       </h1>
-      <h3 className="findPathText" onClick={handleFindPathRequest}> Find your path today  
+      <h2 className="findPathText" onClick={handleFindPathRequest}> Find your path today  
         <HiArrowRight style={{marginLeft: 5}}/>
-      </h3>
+      </h2>
     </Container>
   )
 
