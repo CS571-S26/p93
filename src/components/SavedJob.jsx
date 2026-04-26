@@ -9,7 +9,7 @@ export default function SavedJob(props) {
   return <Container className="yourListJobContainer">
     <Row>
      <Col>
-      <h5 >{props.company}</h5>
+      <p style={{fontSize: 20, fontWeight: 550}}>{props.company}</p>
      </Col> 
      <Col>
       <p>{props.role}</p>
@@ -25,9 +25,11 @@ export default function SavedJob(props) {
           </a>
      </Col>
      <Col>
+      <Form.Label htmlFor="applied" className="visually-hidden"> Apply internship checkbox </Form.Label>
       <Form.Check
         type="checkbox"
         label="Applied"
+        id="applied"
         checked={props.applied ?? false}
         onChange={(e) => props.applyChange(props.id, e.target.checked)}
         className="orange-check"
@@ -35,7 +37,9 @@ export default function SavedJob(props) {
      </Col>
 
      <Col>
-         <X className="removeJobButton" onClick={() => props.handleRemove(props.id)}/>
+          <button onClick={() => props.handleRemove(props.id)} style={{background: "none", border:"none"}}>
+            <X className="removeJobButton" />
+          </button>
      </Col>
 
     </Row>

@@ -135,8 +135,8 @@ export default function FindJobsPage() {
           <Container style={{marginBottom: 20}} >
             <Row className="align-items-end">
               <Col>
-                <Form.Label> Prompt </Form.Label>
-                <Form.Control ref={promptRef} placeholder="Enter locations and types of positions you're interested in!"/>
+                <Form.Label htmlFor="jobPrompt" > Prompt </Form.Label>
+                <Form.Control id="jobPrompt" ref={promptRef} placeholder="Enter locations and types of positions you're interested in!"/>
               </Col>
               <Col>
                 <button className="generateButton" onClick={handleGenerate} disabled={loading}> Generate </button>

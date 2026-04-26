@@ -75,17 +75,17 @@ export default function YourListPage() {
 
       <Container className="yourListContainer">
 
-        <div
+        <button
           className="section-header"
           onClick={() => setNotAppliedOpen(o => !o)}
-          style={{ cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "10px 0", borderBottom: "1px solid #dee2e6" }}
+          style={{ cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "10px 0", borderBottom: "1px solid #dee2e6", background: "none", borderTop: "none", borderRight: "none" , borderLeft: "none" }}
         >
           <h2 style={{ margin: 0, fontSize: "1.1rem" }}>
             Open
             <span style={{ marginLeft: 10, fontSize: "0.85rem", color: "#6c757d" }}>({notApplied.length})</span>
           </h2>
           {notAppliedOpen ? <ChevronUp /> : <ChevronDown />}
-        </div>
+        </button>
 
         {notAppliedOpen && (
           <div style={{ marginBottom: 20 }}>
@@ -96,17 +96,17 @@ export default function YourListPage() {
           </div>
         )}
 
-        <div
+        <button
           className="section-header"
           onClick={() => setAppliedOpen(o => !o)}
-          style={{ cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "10px 0", borderBottom: "1px solid #dee2e6" }}
+          style={{ cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "10px 0", borderBottom: "1px solid #dee2e6", background: "none", borderTop: "none", borderRight: "none" , borderLeft: "none" }}
         >
           <h2 style={{ margin: 0, fontSize: "1.1rem"}}>
             Applied
             <span style={{ marginLeft: 10, fontSize: "0.85rem", color: "#6c757d" }}>({applied.length})</span>
           </h2>
           {appliedOpen ? <ChevronUp /> : <ChevronDown />}
-        </div>
+        </button>
 
         {appliedOpen && (
           <div style={{ marginBottom: 20 }}>
@@ -119,7 +119,7 @@ export default function YourListPage() {
 
       </Container>
       <p style={{paddingTop:40}}> Jobs by <a href="https://www.adzuna.com" target="_blank" rel="noreferrer">
-           <img src="https://zunastatic-abf.kxcdn.com/images/global/adzuna_logo.svg" alt="Adzuna" style={{ height: 23 }} />
+           <img src="https://zunastatic-abf.kxcdn.com/images/global/adzuna_logo.svg" alt="Adzuna logo" style={{ height: 23 }} />
           </a>
       </p>
     </Container>

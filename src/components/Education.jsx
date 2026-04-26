@@ -7,24 +7,24 @@ export default function Education(props) {
   return <Container className="resumeDataContainer" style={{animation: "fadeIn 0.4s ease both"}}>
     <Row className="resumeRow">
         <Col>
-          <Form.Label> School </Form.Label>
-          <Form.Control value={props.school} onChange={(e) => props.update("Education", props.id, "school", e.target.value)}/> 
+          <Form.Label htmlFor="school"> School </Form.Label>
+          <Form.Control id="school" value={props.school} onChange={(e) => props.update("Education", props.id, "school", e.target.value)}/> 
         </Col>
     </Row>
     <Row className="resumeRow">
         <Col>
-          <Form.Label> Graduation Date </Form.Label>
-          <Form.Control value={props.graduationDate} onChange={(e) => props.update("Education", props.id, "graduationDate", e.target.value)}/> 
+          <Form.Label htmlFor="date"> Graduation Date </Form.Label>
+          <Form.Control id="date" value={props.graduationDate} onChange={(e) => props.update("Education", props.id, "graduationDate", e.target.value)}/> 
         </Col>
         <Col>
-          <Form.Label> GPA </Form.Label>
-          <Form.Control value={props.gpa} onChange={(e) => props.update("Education", props.id, "gpa", e.target.value)}/>
+          <Form.Label htmlFor="grade"> GPA </Form.Label>
+          <Form.Control id="grade" value={props.gpa} onChange={(e) => props.update("Education", props.id, "gpa", e.target.value)}/>
         </Col>
     </Row>
     <Row className="resumeRow">
         <Col>
-          <Form.Label> Major(s) </Form.Label>
-          <Form.Control value={props.majors} onChange={(e) => props.update("Education", props.id, "majors", e.target.value)} />
+          <Form.Label htmlFor="major"> Major(s) </Form.Label>
+          <Form.Control id="major" value={props.majors} onChange={(e) => props.update("Education", props.id, "majors", e.target.value)} />
         </Col>
     </Row>
     <Row className="resumeRow">

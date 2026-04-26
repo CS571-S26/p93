@@ -26,7 +26,7 @@ export default function JobPosting(props) {
   
 
   return <Container className="findJobContainer" style={{animation: "fadeIn 0.4s ease both", animationDelay: `${props.index * 0.1}s`}}>
-    <h3> {props.role} </h3>
+    <p style={{fontSize: 20, fontWeight: 550}}> {props.role} </p>
     <p style={{fontSize: 20}}> {props.company} | {props.location} </p>
     <p> {props.description} </p>
     <p> <span style={{fontWeight: "bold"}}> Matching Skills: </span> {matchedSkills ? matchedSkills : "N/A"} </p>

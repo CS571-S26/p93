@@ -23,7 +23,7 @@ export default function LoginPage() {
 
       signInWithEmailAndPassword(auth, email.current.value, password.current.value)
       .then((cred) => {
-        navigate("/resume");
+        navigate("/yourlist");
 
       }).catch((err) => {
         console.log(err);
@@ -43,7 +43,7 @@ export default function LoginPage() {
       } else {
         createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
         .then((cred) => {
-          navigate("/yourlist");
+          navigate("/resume");
         }).catch((err) => {
           if (err.code === "auth/email-already-in-use") 
             alert("Email already in use! Try again with a different email!");
@@ -59,44 +59,45 @@ export default function LoginPage() {
   return (
     <div>
       <Container className="loginContainer">
-        <h1> Login </h1>
+        {!newUser && <h1> Login </h1>}
+        {newUser && <h1> Register </h1>}
       </Container>
       {
         !newUser ? 
         <Container> 
           <Row className="loginRow">
-            <Form.Label>Enter Email</Form.Label>
-            <Form.Control ref={email}></Form.Control>
+            <Form.Label htmlFor="emailField">Enter Email</Form.Label>
+            <Form.Control id="emailField" ref={email}></Form.Control>
           </Row>
           <Row className="loginRow">
-            <Form.Label >Enter Password</Form.Label>
-            <Form.Control type="password" ref={password}></Form.Control>
+            <Form.Label htmlFor="passwordField">Enter Password</Form.Label>
+            <Form.Control id="passwordField" type="password" ref={password}></Form.Control>
           </Row>
           <Row className="loginRow">
             <Col>
               <Button onClick={() => handleLogin("old")}> Login</Button>
             </Col>
-            <p onClick={() => setNewUser(true)} className="switchLoginMode"> New User? </p>
+            <button onClick={() => setNewUser(true)} className="switchLoginMode"> New User? </button>
           </Row>
         </Container> : 
       <Container> 
         <Row className="loginRow" >
-          <Form.Label> Enter Email </Form.Label>
-          <Form.Control ref={email}></Form.Control>
+          <Form.Label  htmlFor="emailRegField"> Enter Email </Form.Label>
+          <Form.Control id="emailRegField" ref={email}></Form.Control>
         </Row>
         <Row className="loginRow">
-          <Form.Label> Create Password</Form.Label>
-          <Form.Control type="password" ref={password}></Form.Control>
+          <Form.Label htmlFor="passwordRegField"> Create Password</Form.Label>
+          <Form.Control id="passwordRegField" type="password" ref={password}></Form.Control>
         </Row>
         <Row className="loginRow ">
-          <Form.Label> Confirm Password</Form.Label>
-          <Form.Control type="password" ref={repeatPassword}></Form.Control>
+          <Form.Label htmlFor="passwordConfField"> Confirm Password</Form.Label>
+          <Form.Control id="passwordConfField" type="password" ref={repeatPassword}></Form.Control>
         </Row>
         <Row className="loginRow">
           <Col>
             <Button onClick={() => handleLogin("new")}> Create & Login</Button>
           </Col>
-          <p onClick={() => setNewUser(false)} className="switchLoginMode"> Returning User? </p>
+          <button onClick={() => setNewUser(false)} className="switchLoginMode"> Returning User? </button>
         </Row>
         
       </Container>
